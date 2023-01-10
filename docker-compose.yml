@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  frontend:
+    depends_on: 
+      - backend
+    build: ./www
+    ports:
+      - 8080:3000
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000/api/
+
+  backend: 
+    depends_on: 
+      - db
+    build: ./api
+    ports: 
+      - 8000:8000
+    environment: 
+      DATABASE_URL: mongodb://db/todo
+    command: ./docker-entrypoint.sh
+
+  db:
+    image: mongo:4.0-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - todo:/data/db
+
+volumes:
+  todo:
