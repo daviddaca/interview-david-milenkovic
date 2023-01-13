@@ -1,6 +1,6 @@
 FROM node:16-alpine
 
-ENV REACT_APP_API_URL=http://localhost:8000/api/
+ENV REACT_APP_API_URL=http://localhost:8080/api/
 ENV PORT=3000
 WORKDIR /app
 COPY package*.json ./

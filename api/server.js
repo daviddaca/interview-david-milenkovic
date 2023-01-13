@@ -15,6 +15,6 @@ app.use( express.json() );
 app.use(cors());
 
 const todoRouter = require('./routes/todos.js');
-app.use('/api/todos', todoRouter);
+app.use('/todos', todoRouter);
 
 app.listen(PORT, () => { console.log(`Listening on port ${PORT}`) });

@@ -5,20 +5,20 @@ services:
     depends_on: 
       - backend
     build: ./www
-    ports:
-      - 3000:3000
     environment:
-      - REACT_APP_API_URL=http://localhost:8000/api/
+      - REACT_APP_API_URL=http://localhost:8080/api/
+    networks:
+      - test
 
   backend: 
     depends_on: 
       - db
     build: ./api
-    ports: 
-      - 8000:8000
     environment: 
       DATABASE_URL: mongodb://db/todo
     command: ./docker-entrypoint.sh
+    networks:
+      - test
 
   db:
     image: mongo:4.0-xenial
@@ -26,6 +26,8 @@ services:
       - 27017:27017
     volumes:
       - todo:/data/db
+    networks:
+      - test
 
   nginx:
     depends_on:
@@ -35,6 +37,11 @@ services:
     build: ./nginx
     ports:
       - 8080:80
+    networks:
+      - test
 
 volumes:
   todo:
+
+networks:
+  test:
