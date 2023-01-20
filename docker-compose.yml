@@ -16,7 +16,7 @@ services:
     build: ./api
     environment: 
       DATABASE_URL: mongodb://db/todo
-    command: ./docker-entrypoint.sh
+    command: sh ./docker-entrypoint.sh
     networks:
       - test
 
